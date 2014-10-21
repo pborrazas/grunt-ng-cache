@@ -1,0 +1,34 @@
+{
+  "name": "grunt-ng-cache",
+  "version": "0.1.0",
+  "author": {
+    "name": "Pablo A. Borrazás",
+    "url": "https://github.com/pborrazas/"
+  },
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.0",
+    "load-grunt-tasks": "~0.2.0",
+    "grunt-contrib-clean": "~0",
+    "grunt-contrib-jshint": "~0",
+    "grunt-contrib-nodeunit": "~0"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.0"
+  },
+  "keywords": [
+    "gruntplugin",
+    "angular",
+    "cache",
+    "templates"
+  ],
+  "files": [
+    "tasks",
+    "LICENSE-MIT"
+  ]
+}
