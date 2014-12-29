@@ -11,7 +11,7 @@
 
 To install the module:
 ```
-npm install --save-dev git@github.com:pborrazas/grunt-ng-cache.git
+npm install --save-dev git@gitlab.despegar.it:front-end-tools/grunt-ng-cache.git
 ```
 
 Include the task in your Gruntfile:
@@ -66,15 +66,18 @@ Details of filepaths and URLs of cached files.
 
 ### $http cache (default AngularJs cache for http requests)
 ```js
+ngCache: {
   customCache: {
     src: 'src/i18n/*.json',
     dest: 'dist/l10nCache.js',
     moduleName: 'demo'
   }
+}
 ```
 
 ### Template cache (default AngularJs cache for templates)
 ```js
+ngCache: {
   templateCache: {
     src: 'src/templates/*.html',
     dest: 'dist/templateCache.js',
@@ -83,10 +86,12 @@ Details of filepaths and URLs of cached files.
       cacheName: 'templates'
     }
   }
+}
 ```
 
 ### Custom cache
 ```js
+ngCache: {
   customCache: {
     src: 'src/i18n/*.json',
     dest: 'dist/l10nCache.js',
@@ -95,11 +100,12 @@ Details of filepaths and URLs of cached files.
       cacheName: 'customCacheName'
     }
   }
-
+}
 ```
 
 ### Custom cached URLs
 ```js
+ngCache: {
   customCache: {
     src: 'src/templates/*.html',
     dest: 'dist/templateCache.js',
@@ -111,5 +117,46 @@ Details of filepaths and URLs of cached files.
       }
     }
   }
+}
+```
+## Use with file preprocessors
 
+You can preprocess files before compile them into angular cache. For HTML template files you can use htmlmin as follow:
+
+```js
+htmlmin: {
+  templates: {
+    options: {
+      removeComments: true,
+      collapseWhitespace: true
+    },
+    files: [{
+      expand: true,
+      cwd: 'ng-app/',
+      src: '**/*.html',
+      dest: '.tmp/templates'
+    }]
+  }
+},
+ngCache: {
+  customCache: {
+    src: '.tmp/templates/**/*.html',
+    dest: 'dist/ngCache.js',
+    moduleName: 'demo',
+    options: {
+      cacheUrl: function (filePath) {
+        var regexp = new RegExp(/^\.tmp\/templates(.*)/);
+        return '/static/templates'.concat(regexp.exec(path));
+      }
+    }
+  }
+}
+```
+
+Run htmlmin before cache task:
+```js
+grunt.registerTask('build', [
+  'htmlmin:templates',
+  'ngCache'
+]);
 ```
