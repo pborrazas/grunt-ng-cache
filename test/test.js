@@ -69,5 +69,14 @@ exports.ngtemplates = {
     test.expect(1);
     test.equal(expected, actual);
     test.done();
-  }
+  },
+
+  noEscaped: function (test) {
+    var actual = grunt.file.read('tmp/noEscaped.js');
+    var expected = grunt.file.read('test/expected/noEscaped.js');
+
+    test.expect(1);
+    test.equal(expected, actual);
+    test.done();
+  },  
 };

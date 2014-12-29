@@ -72,6 +72,14 @@ module.exports = function(grunt) {
         src: 'test/fixtures/indentation.html',
         dest: 'tmp/indentation.js',
         moduleName: 'demo'
+      },
+      noEscaped: {
+        src: 'test/fixtures/singlequotes.html',
+        dest: 'tmp/noEscaped.js',
+        moduleName: 'demo',
+        options: {
+          escapeContent: false
+        }
       }
     }
   });
