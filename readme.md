@@ -11,7 +11,7 @@
 
 To install the module:
 ```
-npm install --save-dev git@gitlab.despegar.it:front-end-tools/grunt-ng-cache.git
+npm install --save-dev git@github.com:pborrazas/grunt-ng-cache.git
 ```
 
 Include the task in your Gruntfile:
@@ -133,47 +133,4 @@ ngCache: {
 ```
 ## Use with file preprocessors
 
-You can pre process files before compile them into angular's cache. For HTML template files you can use htmlmin as follow:
-
-```js
-htmlmin: {
-  templates: {
-    options: {
-      removeComments: true,
-      collapseWhitespace: true
-    },
-    files: [{
-      expand: true,
-      cwd: 'ng-app/',
-      src: '**/*.html',
-      dest: '.tmp/templates'
-    }]
-  }
-},
-ngCache: {
-  dist: {
-    src: '.tmp/templates/**/*.html',
-    dest: 'dist/ngCache.js',
-    moduleName: 'templatesDemo',
-    options: {
-      cacheUrl: function (filePath) {
-        var regexp = new RegExp(/^\.tmp\/templates(.*)/);
-        return '/static/templates'.concat(regexp.exec(path)[1]);
-      }
-    }
-  }
-}
 ```
-
-Run htmlmin before cache task:
-```js
-grunt.registerTask('build', [
-  'htmlmin:templates',
-  'ngCache'
-]);
-```
-
-## Based on previous work of [https://github.com/ericclemmons](https://github.com/ericclemmons) and [https://github.com/vojtajina](https://github.com/vojtajina) in the following plugins:
-
-[https://github.com/karma-runner/karma-ng-html2js-preprocessor](https://github.com/karma-runner/karma-ng-html2js-preprocessor)
-[https://github.com/ericclemmons/grunt-angular-templates](https://github.com/ericclemmons/grunt-angular-templates)
