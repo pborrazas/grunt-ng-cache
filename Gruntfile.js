@@ -74,7 +74,7 @@ module.exports = function(grunt) {
         moduleName: 'demo'
       },
       noEscaped: {
-        src: 'test/fixtures/singlequotes.html',
+        src: 'test/fixtures/singlequotes.json',
         dest: 'tmp/noEscaped.js',
         moduleName: 'demo',
         options: {
