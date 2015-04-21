@@ -7,7 +7,7 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('ngCache', 'Compile files into AngularJs cache', function() {
 
     var options = this.options({
-      defaultModuleName: '', /* {String=} AngularJS module name by default */
+      moduleName: '', /* {String=} AngularJS module name by default */
       standalone: false, /* {Boolean=} Indicates whether the referenced module by ´moduleName´ is an existing module or a new one has to be created. Defaults to false */
       cacheName: '$http', /* {String=} Defaults to '$http' the default AngularJs cache name for http requests. Use 'templates' to cache HTML files */
       cacheUrl: null, /* {Function=} Allows customization of the urls files are added to the cache. Optional */
@@ -30,7 +30,7 @@ module.exports = function(grunt) {
         grunt.log.warn('No templates found.');
         return false;
       }
-      if (!(module.moduleName || options.defaultModuleName)) {
+      if (!(module.moduleName || options.moduleName)) {
         grunt.log.error('Missing param. ´moduleName´ is required.');
         return false;
       }
@@ -52,7 +52,7 @@ module.exports = function(grunt) {
         return util.format(entryTpl, url, escape(grunt.file.read(path)));
       });
 
-      var moduleName = module.moduleName || options.defaultModuleName;
+      var moduleName = module.moduleName || options.moduleName;
       var fileContent = util.format(tpl,
         moduleName,
         options.cacheName,
