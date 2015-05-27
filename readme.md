@@ -133,4 +133,28 @@ ngCache: {
 ```
 ## Use with file preprocessors
 
+```js
+ngCache: {
+  htmlmin: {
+    templates: {
+      options: {
+        removeComments: true,
+        collapseWhitespace: true
+      },
+      files: [{
+        src: '**/*.html',
+        dest: '.tmp/templates' /* <-- use a temporary folder to write on */
+      }]
+    }
+  },
+  customCache: {
+    src: '.tmp/templates/*.html',  /* <-- and to read from */
+    dest: 'dist/templateCache.js',
+    moduleName: 'demo'
+  }
+}
 ```
+
+This grunt plugin is based on the following existent plugins:
+[karma-ng-html2js-preprocessor](https://github.com/karma-runner/karma-ng-html2js-preprocessor)
+[grunt-angular-templates](https://github.com/ericclemmons/grunt-angular-templates)
