@@ -39,7 +39,7 @@ module.exports = function(grunt) {
 
       var entries = module.src.map(function(path) {
         function escape(data) {
-          return options.escapeContent ? '\'' + (data + '').replace(/'/g, '\\$&').replace(/\r?\n/g, '\\n').replace(/(\t)/g, '\\t') + '\'' : data;
+          return options.escapeContent ? '\'' + (data + '').replace(/'|\\/g, '\\$&').replace(/\r?\n/g, '\\n').replace(/(\t)/g, '\\t') + '\'' : data;
         }
         function cacheUrl(path) {
           path = path.replace(/\\/g, '/'); /* fix windows backslashes */
